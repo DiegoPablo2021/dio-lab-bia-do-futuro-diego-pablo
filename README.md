@@ -1,103 +1,242 @@
-# 🎓 Edu - Educador Financeiro Inteligente
+# Aura, Mentora de Saúde Financeira
 
-> Agente de IA Generativa que ensina conceitos de finanças pessoais de forma simples e personalizada, usando os próprios dados do cliente como exemplos práticos.
+Aplicação desenvolvida para o desafio da DIO "Construa seu Assistente Virtual com Inteligência Artificial".
 
-## 💡 O Que é o Edu?
+Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela não vende promessa, não recomenda investimento direto e não inventa contexto: organiza dados, explica conceitos e sugere próximos passos educativos com base em fontes confiáveis.
 
-O Edu é um educador financeiro que **ensina**, não recomenda. Ele explica conceitos como reserva de emergência, tipos de investimentos e análise de gastos usando uma abordagem didática e exemplos concretos baseados no perfil do cliente.
+## Visão do projeto
 
-**O que o Edu faz:**
-- ✅ Explica conceitos financeiros de forma simples
-- ✅ Usa dados do cliente como exemplos práticos
-- ✅ Responde dúvidas sobre produtos financeiros
-- ✅ Analisa padrões de gastos de forma educativa
+![Preview da interface da Aura](./assets/aura-ui-preview.svg)
 
-**O que o Edu NÃO faz:**
-- ❌ Não recomenda investimentos específicos
-- ❌ Não acessa dados bancários sensíveis
-- ❌ Não substitui um profissional certificado
+![Arquitetura da Aura](./assets/arquitetura-aura.svg)
 
-## 🏗️ Arquitetura
+## O que faz este projeto chamar atenção
 
-```mermaid
-flowchart TD
-    A[Usuário] --> B[Streamlit]
-    B --> C[Ollama - LLM Local]
-    C --> D[Base de Conhecimento]
-    D --> C
-    C --> E[Resposta Educativa]
+- Interface Streamlit com cara de produto, não apenas demo técnica
+- Diagnóstico financeiro real a partir dos dados mockados da DIO
+- Dois modos de uso: demonstração guiada e agente livre com contexto personalizável
+- Plano educativo de 7 dias para transformar resposta em ação
+- Guardrails explícitos para segurança e anti-alucinação
+- Integração com Gemini API via Google AI Studio e suporte opcional a OpenAI
+- Enriquecimento com fontes oficiais do Banco Central e do Tesouro Direto
+
+## O que o avaliador consegue ver na prática
+
+- um modo de demonstração guiada, ideal para o vídeo e para a banca;
+- um modo de agente livre com contexto dinâmico por nome, renda, objetivo e perfil investidor;
+- respostas diferentes conforme a persona selecionada;
+- guardrails claros para escopo, recomendação proibida e dados sensíveis;
+- documentação, testes e assets visuais prontos para portfólio.
+
+## Objetivo do projeto
+
+Construir uma mentora digital de saúde financeira capaz de transformar dados em clareza, diagnóstico e educação financeira personalizada para iniciantes no Brasil, com respostas seguras, coerentes e rastreáveis.
+
+## O que foi utilizado para desenvolver
+
+- Python 3.12
+- Streamlit para interface e experiência navegável
+- Gemini API via Google AI Studio como provedor principal
+- SDK oficial `google-generativeai` como integração preferencial do Gemini
+- OpenAI como opcional e fallback de integração
+- Pandas para leitura e tratamento dos dados
+- Requests para consumo das fontes oficiais
+- Python Dotenv para configuração segura de ambiente
+- Pytest para testes automatizados
+- Ruff para qualidade e padronização do código
+
+## Por que Gemini foi escolhido
+
+- opção gratuita mais aderente para a fase atual do projeto;
+- fluxo simples de chave via Google AI Studio;
+- boa qualidade para respostas educativas;
+- integração compatível com o SDK oficial do ecossistema Gemini;
+- suficiente para demonstrar engenharia de prompt, segurança e contexto sem elevar custo da entrega.
+
+## Escopo da Aura
+
+### Faz
+- explica conceitos financeiros com linguagem simples;
+- resume padrão de gastos e saldo do período;
+- contextualiza a reserva de emergência;
+- compara produtos financeiros de forma educativa;
+- usa o perfil do cliente para adequar o tom e a profundidade;
+- mostra as referências usadas sempre que possível.
+
+### Modos de experiência
+- Demonstração guiada: cenário pronto para apresentar o desafio com dados consistentes da DIO.
+- Agente livre: contexto personalizável para conversar como um agente educacional, sem ficar preso ao perfil fixo do João.
+
+### Não faz
+- não recomenda compra de ativo ou produto específico;
+- não promete rentabilidade;
+- não responde com dado inventado;
+- não acessa ou compartilha informações sensíveis;
+- não substitui assessor ou planejador financeiro certificado.
+
+## Fontes utilizadas
+
+- Base local da DIO:
+  - `data/transacoes.csv`
+  - `data/historico_atendimento.csv`
+  - `data/perfil_investidor.json`
+  - `data/produtos_financeiros.json`
+- Selic oficial do Banco Central:
+  - https://dadosabertos.bcb.gov.br/dataset/11-taxa-de-juros---selic
+- Produtos do Tesouro Direto:
+  - https://www.tesourodireto.com.br/produtos/nossos-produtos
+
+## Arquitetura
+
+```text
+.
+|-- data/
+|-- docs/
+|   |-- 01-documentacao-agente.md
+|   |-- 02-base-conhecimento.md
+|   |-- 03-prompts.md
+|   |-- 04-metricas.md
+|   `-- 05-pitch.md
+|-- src/
+|   |-- app.py
+|   |-- prompts/
+|   |   |-- few_shots.txt
+|   |   `-- system_prompt.txt
+|   `-- services/
+|       |-- agent.py
+|       |-- context_builder.py
+|       |-- data_loader.py
+|       |-- external_sources.py
+|       |-- finance_analyzer.py
+|       `-- safety.py
+|-- tests/
+|-- .env.example
+|-- main.py
+`-- requirements.txt
 ```
 
-**Stack:**
-- Interface: Streamlit
-- LLM: Ollama (modelo local `gpt-oss`)
-- Dados: JSON/CSV mockados
+## Como executar
 
-## 📁 Estrutura do Projeto
+### 1. Criar e ativar ambiente virtual
 
-```
-├── data/                          # Base de conhecimento
-│   ├── perfil_investidor.json     # Perfil do cliente
-│   ├── transacoes.csv             # Histórico financeiro
-│   ├── historico_atendimento.csv  # Interações anteriores
-│   └── produtos_financeiros.json  # Produtos para ensino
-│
-├── docs/                          # Documentação completa
-│   ├── 01-documentacao-agente.md  # Caso de uso e persona
-│   ├── 02-base-conhecimento.md    # Estratégia de dados
-│   ├── 03-prompts.md              # System prompt e exemplos
-│   ├── 04-metricas.md             # Avaliação de qualidade
-│   └── 05-pitch.md                # Apresentação do projeto
-│
-└── src/
-    └── app.py                     # Aplicação Streamlit
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-## 🚀 Como Executar
-
-### 1. Instalar Ollama
+Linux/macOS:
 
 ```bash
-# Baixar em: ollama.com
-ollama pull gpt-oss
-ollama serve
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-### 2. Instalar Dependências
+### 2. Instalar dependências
 
 ```bash
-pip install streamlit pandas requests
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-### 3. Rodar o Edu
+### 3. Configurar API
+
+Opção recomendada e gratuita: Gemini via Google AI Studio.
+
+Crie um arquivo `.env` a partir de `.env.example` ou exporte a variável abaixo no seu terminal:
+
+```bash
+GEMINI_API_KEY=sua_chave_aqui
+```
+
+Opcional:
+
+```bash
+AURA_PROVIDER=gemini
+AURA_MODEL=gemini-2.5-flash
+```
+
+Se quiser usar OpenAI em vez de Gemini:
+
+```bash
+OPENAI_API_KEY=sua_chave_aqui
+AURA_PROVIDER=openai
+AURA_MODEL=gpt-5-mini
+```
+
+### 4. Rodar a aplicação
 
 ```bash
 streamlit run src/app.py
 ```
 
-## 🎯 Exemplo de Uso
+## Modos de execução
 
-**Pergunta:** "O que é CDI?"  
-**Edu:** "CDI é uma taxa de referência usada pelos bancos. Quando um investimento rende '100% do CDI', significa que ele acompanha essa taxa. Hoje o CDI está próximo da Selic. Quer que eu explique a diferença entre os dois?"
+- Com `GEMINI_API_KEY`: respostas geradas pela Gemini API via Google AI Studio
+- Com `OPENAI_API_KEY`: respostas geradas pela OpenAI API com contexto estruturado
+- Sem chave de API: fallback local com diagnósticos e respostas determinísticas
 
-**Pergunta:** "Onde estou gastando mais?"  
-**Edu:** "Olhando suas transações de outubro, sua maior despesa é moradia (R$ 1.380), seguida de alimentação (R$ 570). Juntas, representam quase 80% dos seus gastos. Isso é bem comum! Quer que eu explique algumas estratégias de organização?"
+Isso é ótimo para demo, porque o projeto continua funcional mesmo sem acesso imediato à API.
 
-## 📊 Métricas de Avaliação
+## Evolução dos prompts
 
-| Métrica | Objetivo |
-|---------|----------|
-| **Assertividade** | O agente responde o que foi perguntado? |
-| **Segurança** | Evita inventar informações (anti-alucinação)? |
-| **Coerência** | A resposta é adequada ao perfil do cliente? |
+O projeto não ficou preso em um prompt único e estático. A estratégia adotada foi iterativa:
 
-## 🎬 Diferenciais
+- começar pelas regras fundamentais do agente;
+- adicionar exemplos few-shot para reduzir ambiguidade;
+- documentar casos extremos para fora de escopo, dado sensível e recomendação proibida;
+- reforçar o uso exclusivo de dados confiáveis;
+- estruturar o prompt com delimitadores claros para missão, regras, tom e formato de resposta;
+- mover parte da segurança para uma camada de guardrails fora do modelo.
 
-- **Personalização:** Usa os dados do próprio cliente nos exemplos
-- **100% Local:** Roda com Ollama, sem enviar dados para APIs externas
-- **Educativo:** Foco em ensinar, não em vender produtos
-- **Seguro:** Estratégias de anti-alucinação documentadas
+Essa evolução está descrita em [docs/03-prompts.md](./docs/03-prompts.md).
 
-## 📝 Documentação Completa
+## Arquivos oficiais adicionados em `data/`
 
-Toda a documentação técnica, estratégias de prompt e casos de teste estão disponíveis na pasta [`docs/`](./docs/).
+- `data/selic_bacen.json`: snapshot da série oficial da Selic
+- `data/tesouro_direto_produtos.json`: snapshot estruturado dos produtos do Tesouro Direto
+
+## Como testar
+
+```bash
+python -m pytest
+```
+
+## Como validar qualidade
+
+```bash
+python -m ruff check .
+```
+
+## Perguntas para demonstração
+
+- Onde estou gastando mais?
+- Como está minha reserva de emergência?
+- O que é Selic?
+- Me explique Tesouro Selic
+- Qual investimento eu devo comprar hoje?
+- Como está o clima na cidade de Natal/RN?
+
+## Sugestão de capturas para o GitHub
+
+- tela inicial da Aura no modo `Demonstração guiada`
+- troca para `Agente livre` com nome e perfil personalizados
+- comparação entre resposta `conservadora` e `arrojada`
+- pergunta fora de escopo caindo em `guardrail`
+
+## Documentação do desafio
+
+- [Documentação do agente](./docs/01-documentacao-agente.md)
+- [Base de conhecimento](./docs/02-base-conhecimento.md)
+- [Prompts](./docs/03-prompts.md)
+- [Métricas](./docs/04-metricas.md)
+- [Pitch](./docs/05-pitch.md)
+- [Evidências de testes](./docs/06-evidencias.md)
+
+## Autor
+
+- Diego Pablo de Menezes
+- LinkedIn: https://www.linkedin.com/in/diego-pablo/
+- GitHub: https://github.com/DiegoPablo2021/
+- Portfolio: https://diego-pablo.vercel.app/

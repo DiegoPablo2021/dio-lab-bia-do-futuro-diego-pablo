@@ -1,0 +1,9 @@
+[tool.ruff]
+line-length = 100
+exclude = [
+  ".venv",
+  ".pytest_cache",
+  "pytest-cache-files-*",
+  "tests/.pytest_temp",
+  "tests/.tmp",
+]

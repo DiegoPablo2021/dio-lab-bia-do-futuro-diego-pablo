@@ -1,0 +1,27 @@
+{
+  "source": "Tesouro Direto",
+  "page_url": "https://www.tesourodireto.com.br/produtos/nossos-produtos",
+  "captured_from": "Resumo manual estruturado a partir da pagina oficial indexada pelo mecanismo de busca e mantido como snapshot local para uso no desafio.",
+  "titles": [
+    {
+      "nome": "Tesouro Selic",
+      "resumo": "Ideal para reserva de emergencia."
+    },
+    {
+      "nome": "Tesouro IPCA+",
+      "resumo": "Rentabilidade sempre acima da inflacao."
+    },
+    {
+      "nome": "Tesouro Educa+",
+      "resumo": "Planeje a educacao dos seus filhos ou dos seus estudos."
+    },
+    {
+      "nome": "Tesouro RendA+",
+      "resumo": "Viabilize uma aposentadoria mais confortavel."
+    },
+    {
+      "nome": "Tesouro Prefixado",
+      "resumo": "Garanta uma rentabilidade fixa se carregar ate o vencimento."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.pytest_temp/
+pytest-cache-files-*/
+data/session_memory.json
+tests/.tmp/
+tests/.pytest_temp/
+.venv/
+.env
+*.pyo
+.ruff_cache/

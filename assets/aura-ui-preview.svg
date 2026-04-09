@@ -1,0 +1,45 @@
+<svg width="1400" height="880" viewBox="0 0 1400 880" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="880" rx="28" fill="#081321"/>
+  <rect x="0" y="0" width="210" height="880" fill="#262832"/>
+  <text x="24" y="70" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Aura</text>
+  <text x="24" y="120" fill="#C9D8EC" font-family="Segoe UI, Arial, sans-serif" font-size="18">Contexto da conversa</text>
+  <circle cx="28" cy="164" r="8" fill="#FF5A5F"/>
+  <text x="46" y="170" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Demonstração guiada</text>
+  <circle cx="28" cy="204" r="8" fill="#3B4256"/>
+  <text x="46" y="210" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Agente livre</text>
+
+  <rect x="20" y="240" width="170" height="110" rx="14" fill="#2D4D74"/>
+  <text x="34" y="278" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Cenário pronto para demo</text>
+  <text x="34" y="304" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">com dados da DIO e</text>
+  <text x="34" y="330" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">contexto consistente.</text>
+
+  <rect x="240" y="36" width="1130" height="194" rx="24" fill="#0D1B31" stroke="#203D62"/>
+  <text x="274" y="92" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">DIAGNÓSTICO FINANCEIRO COM IA, DADOS E GUARDRAILS</text>
+  <text x="274" y="150" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">Aura, Mentora de Saúde Financeira</text>
+  <text x="274" y="195" fill="#D2E0F1" font-family="Segoe UI, Arial, sans-serif" font-size="22">Uma mentora digital que explica, organiza e contextualiza, com foco em clareza para iniciantes.</text>
+
+  <text x="250" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Entradas</text>
+  <text x="250" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 5.000,00</text>
+  <text x="620" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Saídas</text>
+  <text x="620" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.488,90</text>
+  <text x="1000" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Saldo do período</text>
+  <text x="1000" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.511,10</text>
+
+  <text x="250" y="420" fill="#FF5A5F" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Chat educativo</text>
+  <text x="420" y="420" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Diagnóstico</text>
+  <text x="560" y="420" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Plano de 7 dias</text>
+  <text x="770" y="420" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Avaliação</text>
+  <line x1="248" y1="438" x2="1328" y2="438" stroke="#334761" stroke-width="2"/>
+
+  <text x="250" y="500" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Converse com a Aura</text>
+  <rect x="250" y="560" width="1080" height="72" rx="18" fill="#1F2430"/>
+  <circle cx="286" cy="596" r="14" fill="#FF5A5F"/>
+  <text x="320" y="603" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Onde estou gastando mais?</text>
+
+  <circle cx="286" cy="688" r="14" fill="#F5A623"/>
+  <text x="320" y="695" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Diego, pelo seu perfil conservador, sua maior categoria de gasto é moradia.</text>
+  <text x="320" y="730" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Se quiser, eu posso continuar de forma mais didática, focando em segurança e liquidez.</text>
+
+  <rect x="250" y="788" width="1080" height="56" rx="16" fill="#2B2A33"/>
+  <text x="280" y="823" fill="#9FB0C7" font-family="Segoe UI, Arial, sans-serif" font-size="20">Digite sua dúvida sobre saúde financeira</text>
+</svg>

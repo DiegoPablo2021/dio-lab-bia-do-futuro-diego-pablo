@@ -1,0 +1,50 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" rx="28" fill="#081423"/>
+  <rect x="40" y="40" width="1120" height="620" rx="24" fill="url(#bg)"/>
+  <text x="70" y="95" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Aura, Mentora de Saúde Financeira</text>
+  <text x="70" y="130" fill="#C8D7EA" font-family="Segoe UI, Arial, sans-serif" font-size="18">Arquitetura da solução para o desafio da DIO</text>
+
+  <rect x="70" y="170" width="230" height="170" rx="18" fill="#10233A" stroke="#284C73"/>
+  <text x="95" y="215" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Camada de Dados</text>
+  <text x="95" y="255" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">CSV da DIO</text>
+  <text x="95" y="285" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">JSON de perfil e produtos</text>
+  <text x="95" y="315" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Selic e Tesouro Direto</text>
+
+  <rect x="345" y="170" width="250" height="170" rx="18" fill="#10233A" stroke="#284C73"/>
+  <text x="370" y="215" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Orquestração</text>
+  <text x="370" y="255" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">DataLoader</text>
+  <text x="370" y="285" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">ContextBuilder</text>
+  <text x="370" y="315" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">AuraAgent</text>
+
+  <rect x="640" y="170" width="250" height="170" rx="18" fill="#10233A" stroke="#284C73"/>
+  <text x="665" y="215" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Inteligência</text>
+  <text x="665" y="255" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Gemini API</text>
+  <text x="665" y="285" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Fallback local</text>
+  <text x="665" y="315" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Prompt + Few-shots</text>
+
+  <rect x="935" y="170" width="190" height="170" rx="18" fill="#10233A" stroke="#284C73"/>
+  <text x="960" y="215" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Segurança</text>
+  <text x="960" y="255" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Guardrails</text>
+  <text x="960" y="285" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Anti-alucinação</text>
+  <text x="960" y="315" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Escopo controlado</text>
+
+  <rect x="155" y="420" width="890" height="170" rx="20" fill="#0C1B2F" stroke="#2A527F"/>
+  <text x="185" y="470" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Interface Streamlit</text>
+  <text x="185" y="510" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="17">- Modo Demonstração Guiada para a banca e para o vídeo</text>
+  <text x="185" y="540" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="17">- Modo Agente Livre com contexto dinâmico por nome, objetivo e perfil investidor</text>
+  <text x="185" y="570" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="17">- Chat educativo, diagnóstico financeiro, plano de 7 dias e avaliação</text>
+
+  <path d="M300 255H345" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M595 255H640" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M890 255H935" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M485 340V390" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M760 340V390" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1030 340V390" stroke="#6DA7E4" stroke-width="4" stroke-linecap="round"/>
+
+  <defs>
+    <linearGradient id="bg" x1="40" y1="40" x2="1160" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1A30"/>
+      <stop offset="1" stop-color="#0A1630"/>
+    </linearGradient>
+  </defs>
+</svg>
