@@ -8,10 +8,11 @@
   <circle cx="28" cy="204" r="8" fill="#3B4256"/>
   <text x="46" y="210" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Agente livre</text>
 
-  <rect x="20" y="240" width="170" height="110" rx="14" fill="#2D4D74"/>
-  <text x="34" y="278" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Cenário pronto para demo</text>
-  <text x="34" y="304" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">com dados da DIO e</text>
-  <text x="34" y="330" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="16">contexto consistente.</text>
+  <rect x="20" y="236" width="178" height="136" rx="16" fill="#2D4D74"/>
+  <text x="34" y="272" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="15.5">Cenário pronto para</text>
+  <text x="34" y="297" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="15.5">demo com dados da</text>
+  <text x="34" y="322" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="15.5">DIO e contexto</text>
+  <text x="34" y="347" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="15.5">financeiro consistente.</text>
 
   <rect x="240" y="36" width="1130" height="194" rx="24" fill="#0D1B31" stroke="#203D62"/>
   <text x="274" y="92" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">DIAGNÓSTICO FINANCEIRO COM IA, DADOS E GUARDRAILS</text>

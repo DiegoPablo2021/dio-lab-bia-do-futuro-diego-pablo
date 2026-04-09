@@ -8,6 +8,8 @@ Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela 
 
 ![Preview da interface da Aura](./assets/aura-ui-preview.svg)
 
+![Preview do modo Agente Livre](./assets/aura-agente-livre-preview.svg)
+
 ![Arquitetura da Aura](./assets/arquitetura-aura.svg)
 
 ## O que faz este projeto chamar atenção
