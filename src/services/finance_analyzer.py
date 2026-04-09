@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any, TypeAlias
 
 import pandas as pd
+
+ProfileData: TypeAlias = dict[str, Any]
 
 
 def format_brl(value: float) -> str:
@@ -25,7 +28,7 @@ class FinancialSnapshot:
 
 
 class FinanceAnalyzer:
-    def build_snapshot(self, profile: dict, transactions: pd.DataFrame) -> FinancialSnapshot:
+    def build_snapshot(self, profile: ProfileData, transactions: pd.DataFrame) -> FinancialSnapshot:
         income = transactions.loc[transactions["tipo"] == "entrada", "valor"].sum()
         expenses = transactions.loc[transactions["tipo"] == "saida", "valor"].sum()
 
@@ -37,11 +40,17 @@ class FinanceAnalyzer:
             .to_dict()
         )
 
-        top_category, top_category_amount = next(iter(expense_by_category.items()))
+        if expense_by_category:
+            top_category, top_category_amount = next(iter(expense_by_category.items()))
+        else:
+            top_category, top_category_amount = "Sem categoria", 0.0
         reserve_target = self._reserve_target(profile)
         reserve_current = float(profile.get("reserva_emergencia_atual", 0.0))
         reserve_gap = max(reserve_target - reserve_current, 0.0)
         reserve_progress = min((reserve_current / reserve_target) * 100, 100.0) if reserve_target else 0.0
+        normalized_expense_by_category = {
+            key: float(value) for key, value in expense_by_category.items()
+        }
 
         return FinancialSnapshot(
             total_income=float(income),
@@ -49,14 +58,14 @@ class FinanceAnalyzer:
             balance=float(income - expenses),
             top_category=top_category,
             top_category_amount=float(top_category_amount),
-            expense_by_category={key: float(value) for key, value in expense_by_category.items()},
+            expense_by_category=normalized_expense_by_category,
             reserve_target=reserve_target,
             reserve_current=reserve_current,
             reserve_gap=reserve_gap,
             reserve_progress=reserve_progress,
         )
 
-    def build_diagnostic_insights(self, profile: dict, snapshot: FinancialSnapshot) -> list[str]:
+    def build_diagnostic_insights(self, profile: ProfileData, snapshot: FinancialSnapshot) -> list[str]:
         insights = [
             (
                 f"A maior concentração de gastos está em {snapshot.top_category}, "
@@ -78,7 +87,7 @@ class FinanceAnalyzer:
             )
         return insights
 
-    def build_seven_day_plan(self, profile: dict, snapshot: FinancialSnapshot) -> list[dict[str, str]]:
+    def build_seven_day_plan(self, profile: ProfileData, snapshot: FinancialSnapshot) -> list[dict[str, str]]:
         objective = profile.get("objetivo_principal", "fortalecer a saúde financeira")
         return [
             {
@@ -125,10 +134,15 @@ class FinanceAnalyzer:
             },
         ]
 
-    def _reserve_target(self, profile: dict) -> float:
+    def _reserve_target(self, profile: ProfileData) -> float:
         income = float(profile.get("renda_mensal", 0.0))
         goal_target = 0.0
-        for item in profile.get("metas", []):
-            if "reserva" in item.get("meta", "").lower():
+        metas = profile.get("metas", [])
+        if not isinstance(metas, list):
+            metas = []
+        for item in metas:
+            if not isinstance(item, dict):
+                continue
+            if "reserva" in str(item.get("meta", "")).lower():
                 goal_target = max(goal_target, float(item.get("valor_necessario", 0.0)))
         return max(income * 6, goal_target)

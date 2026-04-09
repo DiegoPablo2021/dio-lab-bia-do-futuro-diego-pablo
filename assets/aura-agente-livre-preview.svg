@@ -8,11 +8,12 @@
   <circle cx="30" cy="204" r="8" fill="#FF5A5F"/>
   <text x="48" y="210" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Agente livre</text>
 
-  <rect x="20" y="234" width="184" height="102" rx="14" fill="#2D4D74"/>
-  <text x="34" y="266" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14.5">Personalize o perfil</text>
-  <text x="34" y="289" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14.5">para usar a Aura</text>
-  <text x="34" y="312" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14.5">como agente em um</text>
-  <text x="34" y="335" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14.5">atendimento mais livre.</text>
+  <rect x="20" y="234" width="184" height="120" rx="14" fill="#2D4D74"/>
+  <text x="34" y="263" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Personalize o perfil</text>
+  <text x="34" y="285" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">para usar a Aura</text>
+  <text x="34" y="307" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">como agente em um</text>
+  <text x="34" y="329" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">atendimento mais</text>
+  <text x="34" y="351" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">livre.</text>
 
   <text x="22" y="384" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Nome da pessoa</text>
   <rect x="20" y="400" width="180" height="46" rx="12" fill="#0F1320"/>

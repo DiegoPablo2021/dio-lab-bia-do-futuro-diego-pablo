@@ -4,6 +4,7 @@ import os
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -14,14 +15,16 @@ from src.services.finance_analyzer import FinanceAnalyzer, FinancialSnapshot, fo
 from src.services.safety import SafetyGuard
 
 try:
-    from openai import OpenAI
+    from openai import OpenAI as OpenAIClient
 except ImportError:  # pragma: no cover
-    OpenAI = None  # type: ignore[assignment]
+    OpenAIClient = None
 
 try:
-    import google.generativeai as genai
+    from google import genai as google_genai
+    from google.genai import types as genai_types
 except ImportError:  # pragma: no cover
-    genai = None  # type: ignore[assignment]
+    google_genai = None
+    genai_types = None
 
 
 DEFAULT_OPENAI_MODEL = "gpt-5-mini"
@@ -109,7 +112,7 @@ class AuraAgent:
             except Exception:
                 pass
 
-        if active_api_key and OpenAI is not None:
+        if active_api_key and OpenAIClient is not None:
             try:
                 text = self._answer_with_openai(
                     message=message,
@@ -210,8 +213,11 @@ class AuraAgent:
         model: str,
         context: AuraContext,
     ) -> str:
-        client = OpenAI(api_key=api_key)
-        messages = [
+        if OpenAIClient is None:  # pragma: no cover
+            raise RuntimeError("OpenAI SDK não está instalado.")
+
+        client: Any = OpenAIClient(api_key=api_key)
+        messages: list[dict[str, str]] = [
             {
                 "role": "system",
                 "content": f"{self.system_prompt}\n\n{self.few_shots}\n\nCONTEXTO CONFIAVEL:\n{context.prompt_context}",
@@ -221,15 +227,16 @@ class AuraAgent:
         messages.append({"role": "user", "content": message})
 
         if hasattr(client, "responses"):
-            response = client.responses.create(model=model, input=messages)
-            return response.output_text.strip()
+            response: Any = client.responses.create(model=model, input=messages)
+            return str(response.output_text).strip()
 
-        completion = client.chat.completions.create(
+        completion: Any = client.chat.completions.create(
             model=model,
             temperature=0.2,
             messages=messages,
         )
-        return completion.choices[0].message.content.strip()
+        content = completion.choices[0].message.content
+        return str(content).strip()
 
     def _answer_with_gemini(
         self,
@@ -239,7 +246,7 @@ class AuraAgent:
         model: str,
         context: AuraContext,
     ) -> str:
-        if genai is not None:
+        if google_genai is not None and genai_types is not None:
             return self._answer_with_gemini_sdk(
                 message=message,
                 conversation_history=conversation_history,
@@ -263,22 +270,24 @@ class AuraAgent:
         model: str,
         context: AuraContext,
     ) -> str:
-        genai.configure(api_key=api_key)
+        if google_genai is None or genai_types is None:  # pragma: no cover
+            raise RuntimeError("Google GenAI SDK não está instalado.")
+
+        client = google_genai.Client(api_key=api_key)
         system_instruction = (
             f"{self.system_prompt}\n\n{self.few_shots}\n\nCONTEXTO CONFIÁVEL:\n{context.prompt_context}"
         )
-        gemini_model = genai.GenerativeModel(
-            model_name=model,
-            system_instruction=system_instruction,
+        response = client.models.generate_content(
+            model=model,
+            contents=self._build_gemini_contents(message, conversation_history),
+            config=genai_types.GenerateContentConfig(
+                system_instruction=system_instruction,
+                temperature=0.2,
+            ),
         )
-        formatted_history = []
-        for item in conversation_history[-6:]:
-            role = "model" if item["role"] == "assistant" else "user"
-            formatted_history.append({"role": role, "parts": [item["content"]]})
-
-        chat = gemini_model.start_chat(history=formatted_history)
-        response = chat.send_message(message)
-        return response.text.strip()
+        if response.text:
+            return response.text.strip()
+        raise RuntimeError("A resposta do Gemini veio sem texto.")
 
     def _answer_with_gemini_rest(
         self,
@@ -311,6 +320,31 @@ class AuraAgent:
         response.raise_for_status()
         payload = response.json()
         return payload["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+    def _build_gemini_contents(
+        self,
+        message: str,
+        conversation_history: list[dict[str, str]],
+    ) -> list[Any]:
+        if genai_types is None:  # pragma: no cover
+            raise RuntimeError("Google GenAI SDK não está instalado.")
+
+        contents: list[Any] = []
+        for item in conversation_history[-6:]:
+            role = "model" if item["role"] == "assistant" else "user"
+            contents.append(
+                genai_types.Content(
+                    role=role,
+                    parts=[genai_types.Part.from_text(text=item["content"])],
+                )
+            )
+        contents.append(
+            genai_types.Content(
+                role="user",
+                parts=[genai_types.Part.from_text(text=message)],
+            )
+        )
+        return contents
 
     def _fallback_answer(
         self,
