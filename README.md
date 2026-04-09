@@ -6,6 +6,8 @@ Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela 
 
 ## Visão do projeto
 
+[Acessar app no Streamlit](https://aura-mentora-de-saude-financeira.streamlit.app/)
+
 ![Preview da interface da Aura](./assets/aura-ui-preview.svg)
 
 ![Preview do modo Agente Livre](./assets/aura-agente-livre-preview.svg)
@@ -39,7 +41,7 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 - Python 3.12
 - Streamlit para interface e experiência navegável
 - Gemini API via Google AI Studio como provedor principal
-- SDK oficial `google-generativeai` como integração preferencial do Gemini
+- SDK oficial `google-genai` como integração preferencial do Gemini
 - OpenAI como opcional e fallback de integração
 - Pandas para leitura e tratamento dos dados
 - Requests para consumo das fontes oficiais
@@ -92,13 +94,15 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 
 ```text
 .
+|-- assets/
 |-- data/
 |-- docs/
 |   |-- 01-documentacao-agente.md
 |   |-- 02-base-conhecimento.md
 |   |-- 03-prompts.md
 |   |-- 04-metricas.md
-|   `-- 05-pitch.md
+|   |-- 05-pitch.md
+|   `-- 06-evidencias.md
 |-- src/
 |   |-- app.py
 |   |-- prompts/
@@ -113,7 +117,10 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 |       `-- safety.py
 |-- tests/
 |-- .env.example
+|-- .gitignore
 |-- main.py
+|-- pyproject.toml
+|-- pytest.ini
 `-- requirements.txt
 ```
 
@@ -146,15 +153,31 @@ python -m pip install -r requirements.txt
 
 Opção recomendada e gratuita: Gemini via Google AI Studio.
 
-Crie um arquivo `.env` a partir de `.env.example` ou exporte a variável abaixo no seu terminal:
+Crie um arquivo `.env` a partir de `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+No Windows PowerShell, você também pode usar:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Depois, preencha o arquivo com este bloco:
 
 ```bash
 GEMINI_API_KEY=sua_chave_aqui
+AURA_PROVIDER=gemini
+AURA_MODEL=gemini-2.5-flash
 ```
 
-Opcional:
+Se quiser manter o `.env` igual ao modelo completo do projeto:
 
 ```bash
+GEMINI_API_KEY=
+OPENAI_API_KEY=
 AURA_PROVIDER=gemini
 AURA_MODEL=gemini-2.5-flash
 ```
@@ -172,6 +195,10 @@ AURA_MODEL=gpt-5-mini
 ```bash
 streamlit run src/app.py
 ```
+
+App publicado:
+
+https://aura-mentora-de-saude-financeira.streamlit.app/
 
 ## Modos de execução
 
@@ -210,6 +237,15 @@ python -m pytest
 ```bash
 python -m ruff check .
 ```
+
+## Ajustes recomendados no GitHub
+
+Depois dessas evoluções, vale refletir isso no repositório remoto também:
+
+- atualizar a descrição curta do projeto no GitHub com foco em "mentora de saúde financeira com IA, guardrails e fontes oficiais";
+- subir screenshots reais da interface em uso, além dos SVGs conceituais;
+- fixar este projeto no perfil, já que ele agora comunica melhor produto, engenharia e documentação;
+- considerar criar uma release inicial ou tag de entrega do desafio, para marcar esta versão mais madura.
 
 ## Perguntas para demonstração
 
