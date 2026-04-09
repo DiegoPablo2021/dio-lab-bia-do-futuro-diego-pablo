@@ -1,13 +1,17 @@
 # Pitch (3 minutos)
 
-## Versão final para gravação
+> Tip
+>
+> Você pode usar alguns slides para apoiar no seu pitch e mostrar a solução na prática.
 
-Este roteiro foi ajustado para seguir a estrutura sugerida no desafio:
+## Estrutura do pitch
 
-- cerca de 30 segundos para o problema;
-- cerca de 60 segundos para a solução;
-- cerca de 60 segundos para a demonstração prática;
-- cerca de 30 segundos para o diferencial e impacto.
+| Tempo | Seção | O que falar |
+| --- | --- | --- |
+| 0:00 - 0:30 | Problema | A dor que a Aura resolve |
+| 0:30 - 1:30 | Solução | Como a Aura resolve |
+| 1:30 - 2:30 | Demo | Mostrar funcionando |
+| 2:30 - 3:00 | Diferencial | Por que é inovadora |
 
 ## Fala linha por linha
 
@@ -115,3 +119,17 @@ Este roteiro foi ajustado para seguir a estrutura sugerida no desafio:
 ## Texto base para a entrega na DIO
 
 Projeto desenvolvido para o desafio da DIO com foco em um agente educacional de saúde financeira. A solução foi construída com Python, Streamlit e Gemini API, usando os dados mockados da DIO e fontes oficiais do Banco Central e do Tesouro Direto. O diferencial está na combinação de contexto dinâmico, guardrails de segurança, personas por perfil investidor e uma experiência funcional em dois modos: demonstração guiada e agente livre.
+
+## Checklist do pitch
+
+- duração máxima de 3 minutos
+- problema claramente definido
+- solução demonstrada na prática
+- diferencial explicado
+- áudio e vídeo com boa qualidade
+
+## Link do vídeo
+
+Cole aqui o link do seu pitch quando finalizar a gravação:
+
+`[Link do vídeo]`
