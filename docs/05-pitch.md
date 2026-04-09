@@ -1,78 +1,117 @@
 # Pitch (3 minutos)
 
-## Versão pronta para falar
+## Versão final para gravação
+
+Este roteiro foi ajustado para seguir a estrutura sugerida no desafio:
+
+- cerca de 30 segundos para o problema;
+- cerca de 60 segundos para a solução;
+- cerca de 60 segundos para a demonstração prática;
+- cerca de 30 segundos para o diferencial e impacto.
+
+## Fala linha por linha
 
 ### 0:00 a 0:30 - Problema
-Hoje, muita gente quer organizar melhor a vida financeira, mas trava em conceitos básicos, leitura de gastos e escolha do que realmente importa no dia a dia.
 
-O problema não é só falta de conteúdo. Conteúdo existe. O problema é que quase nunca esse conteúdo vem com contexto, linguagem acessível e segurança.
+"Olá, meu nome é Diego Pablo e neste projeto eu desenvolvi a Aura, uma Mentora de Saúde Financeira com Inteligência Artificial."
 
-Foi pensando nisso que eu criei a Aura, uma mentora de saúde financeira com inteligência artificial.
+"A ideia surgiu de um problema muito comum: muitas pessoas querem organizar melhor a vida financeira, mas ainda têm dificuldade para interpretar gastos, entender conceitos como Selic e comparar produtos com segurança."
 
-### 0:30 a 1:10 - Solução
-A Aura foi desenhada para atuar como uma mentora digital educativa.
+"Na prática, conteúdo existe, mas quase sempre falta contexto, linguagem acessível e uma resposta realmente responsável."
 
-Ela analisa dados financeiros, explica conceitos como Selic e Tesouro Selic, ajuda a interpretar gastos, contextualiza a reserva de emergência e sugere próximos passos de forma responsável.
+"Foi para atacar esse problema que eu criei a Aura."
 
-O ponto mais importante é que ela não recomenda investimentos de forma direta, não inventa dados e trabalha com guardrails para manter coerência, segurança e rastreabilidade.
+### 0:30 a 1:30 - Solução
 
-### 1:10 a 2:10 - Demonstração
-Aqui no app, eu tenho dois modos.
+"A Aura é uma mentora digital educativa focada em saúde financeira para iniciantes no Brasil."
 
-O primeiro é a demonstração guiada, que usa um cenário consistente para apresentar o desafio.
+"Ela analisa dados, explica conceitos financeiros, contextualiza a reserva de emergência, compara produtos de forma educativa e sugere próximos passos sem recomendar investimentos de forma direta."
 
-O segundo é o agente livre, onde eu posso personalizar o nome da pessoa, renda mensal, objetivo principal, reserva atual e perfil investidor.
+"O projeto foi desenvolvido com Python, Streamlit e Gemini API via Google AI Studio, além de uma arquitetura separada por camadas para interface, contexto, regras de negócio, integração com dados e segurança."
 
-Isso permite demonstrar injeção de contexto dinâmico.
+"Também utilizei os dados mockados da DIO e enriqueci a solução com fontes oficiais do Banco Central e do Tesouro Direto."
 
-Por exemplo, se eu usar um perfil conservador, a Aura responde de forma mais didática, prudente e focada em segurança e liquidez.
+"Um ponto importante é que a Aura foi desenhada com guardrails. Então, ela não inventa informação, não responde fora do escopo financeiro como se soubesse e não acessa dados sensíveis."
 
-Se eu trocar para um perfil arrojado, ela passa a responder com mais profundidade sobre risco, volatilidade e horizonte de longo prazo.
+### 1:30 a 2:30 - Demonstração prática
 
-Além disso, eu posso testar perguntas de negócio, como:
+"Na demonstração, eu começo pelo modo Demonstração guiada, que usa um cenário consistente para apresentar a solução."
 
-- Onde estou gastando mais?
-- Como está minha reserva de emergência?
-- O que é Selic?
+"Aqui, eu posso perguntar: Onde estou gastando mais?"
 
-E também perguntas fora do escopo, como clima ou futebol, para mostrar que os guardrails funcionam corretamente.
+"A Aura identifica a categoria com maior peso, contextualiza o valor e já transforma esse dado em uma explicação útil."
 
-### 2:10 a 2:45 - Diferenciais
-Os principais diferenciais do projeto são:
+"Depois, eu pergunto: Como está minha reserva de emergência?"
 
-- interface com cara de produto, e não só de protótipo técnico;
-- integração com Gemini API e fallback local;
-- uso de dados da DIO enriquecidos com fontes oficiais do Banco Central e do Tesouro Direto;
-- documentação completa de agente, base de conhecimento, prompts, métricas, evidências e pitch;
-- testes automatizados e estrutura organizada para portfólio.
+"Nesse caso, ela mostra o valor atual, a meta estimada, o percentual atingido e o quanto ainda falta para alcançar esse objetivo."
 
-### 2:45 a 3:00 - Fechamento
-A Aura não foi pensada apenas para responder perguntas.
+"Também posso perguntar: O que é Selic?"
 
-Ela foi pensada para demonstrar arquitetura, engenharia de prompt, segurança, UX e capacidade de transformar dados em uma experiência útil e explicável.
+"A resposta vem em linguagem simples, com foco educativo e conectada ao contexto do usuário."
 
-Esse projeto representa a forma como eu gosto de construir soluções: com clareza técnica, contexto de negócio e foco real em quem vai usar.
+"Para validar segurança, eu posso fazer uma pergunta fora do escopo, como: Como está o clima em Natal?"
 
-## Versão resumida em tópicos
+"Nesse caso, a Aura não alucina. Ela ativa os guardrails e redireciona corretamente para o tema de saúde financeira."
+
+"Além disso, eu também posso trocar para o modo Agente livre e personalizar nome, renda, objetivo e perfil investidor."
+
+"Com isso, a resposta muda de acordo com o contexto e com a persona selecionada, como conservador, moderado ou arrojado."
+
+### 2:30 a 3:00 - Diferencial e impacto
+
+"O grande diferencial da Aura é que ela não funciona só como um chatbot."
+
+"Ela demonstra injeção de contexto dinâmico, engenharia de prompt, segurança, experiência de produto e uso de fontes confiáveis dentro de uma aplicação funcional."
+
+"Ou seja, além de responder, ela explica, organiza e se adapta ao perfil da pessoa de forma responsável."
+
+"Esse projeto representa a forma como eu gosto de construir soluções: com clareza técnica, preocupação com o usuário e foco em resolver um problema real."
+
+"Muito obrigado."
+
+## Roteiro operacional da demo
+
+### Ordem recomendada na gravação
+
+1. Mostrar a tela inicial da Aura.
+2. Apresentar rapidamente o objetivo do projeto.
+3. Usar o modo `Demonstração guiada`.
+4. Fazer a pergunta `Onde estou gastando mais?`.
+5. Fazer a pergunta `Como está minha reserva de emergência?`.
+6. Fazer a pergunta `O que é Selic?`.
+7. Fazer uma pergunta fora do escopo, como `Como está o clima na cidade de Natal/RN?`.
+8. Trocar para `Agente livre`.
+9. Mostrar a personalização de nome, renda e perfil investidor.
+10. Destacar a diferença entre uma persona `conservadora` e uma `arrojada`.
+
+### Perguntas sugeridas para não travar no vídeo
+
+- `Onde estou gastando mais?`
+- `Como foi meu saldo no período?`
+- `Como está minha reserva de emergência?`
+- `O que é Selic?`
+- `Como está o clima na cidade de Natal/RN?`
+
+## Resumo curto para consulta rápida
 
 ### Problema
-- pessoas iniciantes em finanças têm dificuldade para interpretar gastos, taxas e produtos;
+
+- muita gente quer aprender finanças, mas ainda sente dificuldade em interpretar gastos, taxas e produtos;
 - chatbots genéricos costumam responder sem contexto ou com risco de alucinação.
 
 ### Solução
-- Aura, uma mentora de saúde financeira com IA;
+
+- Aura, uma mentora digital de saúde financeira com IA;
 - educativa, segura, contextualizada e sem recomendação direta de investimento.
 
-### Demonstração sugerida
-1. mostrar a tela inicial;
-2. usar `Demonstração guiada`;
-3. perguntar `Onde estou gastando mais?`;
-4. perguntar `Como está minha reserva de emergência?`;
-5. perguntar `O que é Selic?`;
-6. testar uma pergunta fora do escopo;
-7. trocar para `Agente livre` e mostrar a diferença entre personas.
+### Diferenciais
 
-### Diferencial
-- contexto dinâmico por nome, renda, objetivo e perfil investidor;
-- duas experiências no mesmo app;
-- guardrails + fontes oficiais + testes + documentação.
+- dois modos de experiência: demonstração guiada e agente livre;
+- contexto dinâmico por nome, renda, objetivo, reserva e perfil investidor;
+- guardrails para fora de escopo e segurança;
+- fontes oficiais do Banco Central e do Tesouro Direto;
+- documentação, testes e assets de portfólio.
+
+## Texto base para a entrega na DIO
+
+Projeto desenvolvido para o desafio da DIO com foco em um agente educacional de saúde financeira. A solução foi construída com Python, Streamlit e Gemini API, usando os dados mockados da DIO e fontes oficiais do Banco Central e do Tesouro Direto. O diferencial está na combinação de contexto dinâmico, guardrails de segurança, personas por perfil investidor e uma experiência funcional em dois modos: demonstração guiada e agente livre.
