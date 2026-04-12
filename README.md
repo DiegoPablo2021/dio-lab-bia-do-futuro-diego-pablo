@@ -20,6 +20,8 @@ Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela 
 - Diagnóstico financeiro real a partir dos dados mockados da DIO
 - Dois modos de uso: demonstração guiada e agente livre com contexto personalizável
 - Plano educativo de 7 dias para transformar resposta em ação
+- Configuração de provedor com chave via interface para testes locais e em produção
+- Badge visual que mostra o modo real da resposta, evitando confusão entre Gemini, OpenAI e fallback local
 - Guardrails explícitos para segurança e anti-alucinação
 - Integração com Gemini API via Google AI Studio e suporte opcional a OpenAI
 - Enriquecimento com fontes oficiais do Banco Central e do Tesouro Direto
@@ -28,6 +30,7 @@ Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela 
 
 - um modo de demonstração guiada, ideal para o vídeo e para a banca;
 - um modo de agente livre com contexto dinâmico por nome, renda, objetivo e perfil investidor;
+- seleção explícita do provedor de IA com feedback visual do modo realmente utilizado;
 - respostas diferentes conforme a persona selecionada;
 - guardrails claros para escopo, recomendação proibida e dados sensíveis;
 - documentação, testes e assets visuais prontos para portfólio.
@@ -69,7 +72,7 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 
 ### Modos de experiência
 - Demonstração guiada: cenário pronto para apresentar o desafio com dados consistentes da DIO.
-- Agente livre: contexto personalizável para conversar como um agente educacional, sem ficar preso ao perfil fixo do João.
+- Agente livre: contexto personalizável para conversar como um agente educacional, sem ficar preso ao perfil fixo do João. Campos como nome, idade e objetivo podem ser preenchidos livremente pelo usuário.
 
 ### Não faz
 - não recomenda compra de ativo ou produto específico;
@@ -173,6 +176,8 @@ AURA_PROVIDER=gemini
 AURA_MODEL=gemini-2.5-flash
 ```
 
+Se preferir, você também pode abrir o app e inserir a chave diretamente no campo `Gemini API Key` da barra lateral. Isso é útil em produção, quando não existe acesso direto ao arquivo `.env`.
+
 Se quiser manter o `.env` igual ao modelo completo do projeto:
 
 ```bash
@@ -202,9 +207,16 @@ https://aura-mentora-de-saude-financeira.streamlit.app/
 
 ## Modos de execução
 
-- Com `GEMINI_API_KEY`: respostas geradas pela Gemini API via Google AI Studio
+- Com `GEMINI_API_KEY` no `.env` ou digitada na interface: respostas geradas pela Gemini API via Google AI Studio
 - Com `OPENAI_API_KEY`: respostas geradas pela OpenAI API com contexto estruturado
 - Sem chave de API: fallback local com diagnósticos e respostas determinísticas
+
+O app mostra um badge com o modo real da resposta:
+
+- `Gemini ativo` quando a resposta veio da Gemini;
+- `OpenAI ativa` quando a resposta veio da OpenAI;
+- `Modo local ativo` quando não houve uso de provedor externo;
+- `Aguardando resposta` antes da primeira execução no modo Gemini.
 
 Isso é ótimo para demo, porque o projeto continua funcional mesmo sem acesso imediato à API.
 

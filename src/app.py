@@ -54,14 +54,14 @@ def main() -> None:
 
     with st.sidebar:
         st.markdown("### Configuração de IA")
+        env_gemini_key = os.getenv("GEMINI_API_KEY", "")
+        env_openai_key = os.getenv("OPENAI_API_KEY", "")
         provider = st.selectbox(
             "Provedor de IA",
             options=["gemini", "openai", "fallback-local"],
             index=0,
             help="Gemini é a opção gratuita recomendada para este projeto. OpenAI fica como alternativa opcional.",
         )
-        env_gemini_key = os.getenv("GEMINI_API_KEY", "")
-        env_openai_key = os.getenv("OPENAI_API_KEY", "")
         gemini_api_key = ""
         openai_api_key = ""
 
@@ -81,6 +81,9 @@ def main() -> None:
                     value="",
                     type="password",
                     help="Crie sua chave no Google AI Studio para usar a faixa gratuita da Gemini API.",
+                )
+                st.info(
+                    "Gemini desabilitado no seletor até que uma `GEMINI_API_KEY` seja inserida no campo `Gemini API Key`."
                 )
         elif provider == "openai":
             if env_openai_key:
@@ -106,8 +109,8 @@ def main() -> None:
             else DEFAULT_OPENAI_MODEL if provider == "openai" else "fallback-local"
         )
         model = st.text_input("Modelo", value=os.getenv("AURA_MODEL", default_model))
-        mode_label = provider
-        st.caption(f"Modo atual: {mode_label}")
+        status = _resolve_runtime_status(provider, st.session_state.get("aura_messages", []))
+        _render_mode_badge(status["label"], status["tone"])
 
         st.markdown("### Fontes oficiais")
         if market_data.selic_rate and market_data.selic_date:
@@ -128,9 +131,7 @@ def main() -> None:
             "Os indicadores financeiros agora simulam o contexto informado ao lado, preservando a estrutura da base demonstrativa da DIO."
         )
 
-    tab_chat, tab_diag, tab_plan, tab_eval = st.tabs(
-        ["Chat educativo", "Diagnóstico", "Plano de 7 dias", "Avaliação"]
-    )
+    tab_chat, tab_diag, tab_plan = st.tabs(["Chat educativo", "Diagnóstico", "Plano de 7 dias"])
 
     with tab_chat:
         st.markdown("#### Converse com a Aura")
@@ -152,6 +153,8 @@ def main() -> None:
                     with st.expander("Fontes usadas"):
                         for reference in message["references"]:
                             st.markdown(f"- **{reference.label}**: {reference.detail}  \n  {reference.url}")
+                if message.get("notice"):
+                    st.warning(message["notice"], icon=":material/info:")
                 if message.get("mode"):
                     st.caption(f"Modo: {message['mode']}")
 
@@ -193,6 +196,7 @@ def main() -> None:
                     "content": answer.text,
                     "mode": answer.mode,
                     "references": answer.references,
+                    "notice": answer.notice,
                 }
             )
             st.rerun()
@@ -220,12 +224,6 @@ def main() -> None:
                 """,
                 unsafe_allow_html=True,
             )
-
-    with tab_eval:
-        st.markdown("#### Mapa de avaliação")
-        st.caption("Use estes cenários para validar assertividade, segurança, coerência e clareza.")
-        st.dataframe(agent.evaluation_cases(), use_container_width=True)
-
 
 def _apply_theme() -> None:
     st.markdown(
@@ -301,10 +299,58 @@ def _apply_theme() -> None:
                 white-space: normal;
                 word-break: break-word;
             }
+            .mode-badge {
+                margin: 0.45rem 0 0.8rem 0;
+                padding: 0.7rem 0.9rem;
+                border-radius: 14px;
+                border: 1px solid rgba(255,255,255,0.08);
+                font-size: 0.92rem;
+                font-weight: 600;
+            }
+            .mode-badge--success {
+                background: rgba(29, 185, 84, 0.16);
+                color: #d7ffe7;
+            }
+            .mode-badge--warning {
+                background: rgba(243, 181, 98, 0.16);
+                color: #ffe9c9;
+            }
+            .mode-badge--neutral {
+                background: rgba(148, 163, 184, 0.14);
+                color: #e6edf7;
+            }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+
+def _render_mode_badge(label: str, tone: str) -> None:
+    safe_label = html.escape(label)
+    st.markdown(
+        f'<div class="mode-badge mode-badge--{tone}">{safe_label}</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def _resolve_runtime_status(provider: str, messages: list[dict]) -> dict[str, str]:
+    last_assistant = next(
+        (message for message in reversed(messages) if message.get("role") == "assistant" and message.get("mode")),
+        None,
+    )
+    last_mode = str(last_assistant.get("mode", "")) if last_assistant else ""
+
+    if last_mode.startswith("gemini:"):
+        return {"label": "Gemini ativo", "tone": "success"}
+    if last_mode == "fallback-local":
+        return {"label": "Modo local ativo", "tone": "warning"}
+    if last_mode.startswith("openai:"):
+        return {"label": "OpenAI ativa", "tone": "neutral"}
+    if provider == "openai":
+        return {"label": "OpenAI selecionada", "tone": "neutral"}
+    if provider == "gemini":
+        return {"label": "Aguardando resposta", "tone": "neutral"}
+    return {"label": "Modo local ativo", "tone": "warning"}
 
 
 def _sanitize_assistant_content(content: str) -> str:
@@ -361,13 +407,7 @@ def _sidebar_profile_override(agent: AuraAgent) -> dict | None:
 
         st.caption("Personalize o perfil para usar a Aura como agente educacional em um atendimento mais livre.")
         custom_name = st.text_input("Nome da pessoa", value="", key="aura_custom_name")
-        custom_age = st.number_input(
-            "Idade",
-            min_value=18,
-            max_value=100,
-            value=int(sample_profile["idade"]),
-            key="aura_custom_age",
-        )
+        custom_age = st.text_input("Idade", value="", key="aura_custom_age", placeholder="Ex.: 32")
         custom_job = st.text_input("Profissão", value="", key="aura_custom_job")
         custom_income = st.number_input(
             "Renda mensal",
@@ -399,7 +439,7 @@ def _sidebar_profile_override(agent: AuraAgent) -> dict | None:
 
         return {
             "nome": _normalize_person_name(custom_name) or "Pessoa em atendimento",
-            "idade": int(custom_age),
+            "idade": _parse_age(custom_age, int(sample_profile["idade"])),
             "profissao": custom_job.strip() or "Profissão não informada",
             "renda_mensal": float(custom_income),
             "perfil_investidor": custom_profile,
@@ -428,9 +468,18 @@ def _normalize_person_name(name: str) -> str:
     return normalized.title() if normalized else ""
 
 
+def _parse_age(raw_age: str, default_age: int) -> int:
+    cleaned = "".join(character for character in raw_age if character.isdigit())
+    if not cleaned:
+        return default_age
+
+    age = int(cleaned)
+    return max(18, min(100, age))
+
+
 def _reset_sidebar_context() -> None:
     st.session_state["aura_custom_name"] = ""
-    st.session_state["aura_custom_age"] = 32
+    st.session_state["aura_custom_age"] = ""
     st.session_state["aura_custom_job"] = ""
     st.session_state["aura_custom_income"] = 5000.0
     st.session_state["aura_custom_profile"] = "moderado"
