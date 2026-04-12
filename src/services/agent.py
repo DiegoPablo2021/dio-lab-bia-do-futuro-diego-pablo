@@ -36,6 +36,7 @@ class AgentAnswer:
     text: str
     references: list[SourceReference]
     mode: str
+    notice: str | None = None
 
 
 class AuraAgent:
@@ -95,6 +96,8 @@ class AuraAgent:
 
         active_model = model or os.getenv("AURA_MODEL")
 
+        fallback_notice: str | None = None
+
         if provider == "gemini" and gemini_api_key:
             try:
                 text = self._answer_with_gemini(
@@ -109,8 +112,14 @@ class AuraAgent:
                     references=context.references,
                     mode=f"gemini:{active_model or os.getenv('AURA_GEMINI_MODEL') or DEFAULT_GEMINI_MODEL}",
                 )
-            except Exception:
-                pass
+            except Exception as exc:
+                fallback_notice = self._provider_failure_notice("Gemini", exc)
+
+        if provider == "gemini" and not gemini_api_key:
+            fallback_notice = (
+                "A Gemini não foi usada nesta resposta porque nenhuma chave de API foi encontrada. "
+                "O conteúdo abaixo veio do modo local."
+            )
 
         if active_api_key and OpenAIClient is not None:
             try:
@@ -126,8 +135,8 @@ class AuraAgent:
                     references=context.references,
                     mode=f"openai:{active_model or os.getenv('AURA_OPENAI_MODEL') or DEFAULT_OPENAI_MODEL}",
                 )
-            except Exception:
-                pass
+            except Exception as exc:
+                fallback_notice = fallback_notice or self._provider_failure_notice("OpenAI", exc)
 
         return AgentAnswer(
             text=self._with_name(
@@ -136,6 +145,7 @@ class AuraAgent:
             ),
             references=context.references,
             mode="fallback-local",
+            notice=fallback_notice,
         )
 
     def diagnostic_insights(self, profile_override: dict | None = None) -> list[str]:
@@ -416,6 +426,15 @@ class AuraAgent:
         return (
             f"{intro} Posso te ajudar com diagnóstico de gastos, reserva de emergência, comparação de produtos e educação financeira. "
             f"Quando possível, eu cruzo isso com fontes oficiais como {source_labels}. {closing}"
+        )
+
+    def _provider_failure_notice(self, provider_name: str, error: Exception) -> str:
+        detail = " ".join(str(error).split()) or "falha não detalhada"
+        if len(detail) > 180:
+            detail = f"{detail[:177]}..."
+        return (
+            f"{provider_name} indisponível nesta tentativa. A resposta abaixo veio do modo local. "
+            f"Detalhe técnico: {detail}"
         )
 
     def _normalize_text(self, text: str) -> str:
