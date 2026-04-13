@@ -53,7 +53,10 @@ class SafetyGuard:
         if any(keyword in normalized for keyword in self.OFF_TOPIC_KEYWORDS):
             return GuardrailDecision(
                 blocked=True,
-                message="Meu foco aqui é educação e organização financeira. Se quiser, me pergunte sobre gastos, reserva ou produtos.",
+                message=(
+                    "Não consigo te responder isso com segurança dentro da proposta da Aura. "
+                    "Se você quiser, eu posso te ajudar com orçamento, gastos, reserva, dívidas ou produtos financeiros."
+                ),
                 reason="off_topic",
             )
 

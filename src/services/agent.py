@@ -140,7 +140,14 @@ class AuraAgent:
 
         return AgentAnswer(
             text=self._with_name(
-                self._fallback_answer(message, snapshot, market_data, context.references, persona_name),
+                self._fallback_answer(
+                    message,
+                    snapshot,
+                    market_data,
+                    context.references,
+                    persona_name,
+                    conversation_history or [],
+                ),
                 display_name,
             ),
             references=context.references,
@@ -363,10 +370,12 @@ class AuraAgent:
         market_data: OfficialMarketData,
         references: list[SourceReference],
         persona_name: str,
+        conversation_history: list[dict[str, str]],
     ) -> str:
         intro = self._persona_intro(persona_name)
         closing = self._persona_closing(persona_name)
         lower = self._normalize_text(message)
+        focus = self._detect_conversation_focus(message, conversation_history=conversation_history)
         if any(term in lower for term in ["gasto", "gastos", "gastando", "despesa", "despesas"]):
             return (
                 f"{intro} No período analisado, sua maior categoria de gasto foi {snapshot.top_category}, com "
@@ -416,6 +425,31 @@ class AuraAgent:
                 f"de rentabilidade e liquidez. Se quiser, eu comparo os dois de forma objetiva. {closing}"
             )
 
+        if self._is_follow_up_message(lower):
+            if focus == "reserva":
+                return (
+                    f"{intro} No seu caso, a reserva ainda está em {snapshot.reserve_progress:.1f}% da meta estimada. "
+                    f"Antes de pensar em mais risco, o passo mais seguro costuma ser consolidar esse colchão financeiro. "
+                    f"Se quiser, eu transformo isso em um plano prático para os próximos 30 dias. {closing}"
+                )
+            if focus == "selic":
+                return (
+                    f"{intro} No seu caso, entender a Selic ajuda principalmente a interpretar custo do crédito, "
+                    f"rendimento da renda fixa e o melhor uso da sua reserva. Como sua reserva atual está em "
+                    f"{format_brl(snapshot.reserve_current)}, esse tema conversa mais com segurança e liquidez do que com aposta. {closing}"
+                )
+            if focus == "tesouro":
+                return (
+                    f"{intro} No seu caso, o ponto principal não é escolher logo um título, e sim entender objetivo, "
+                    f"prazo e liquidez antes da decisão. Como sua situação atual mostra saldo de {format_brl(snapshot.balance)}, "
+                    f"posso te orientar pela lógica de uso de cada produto. {closing}"
+                )
+            if focus == "gastos":
+                return (
+                    f"{intro} O ponto mais relevante aqui é que {snapshot.top_category} concentra {format_brl(snapshot.top_category_amount)} "
+                    f"dos seus gastos no período. Isso costuma ser o melhor lugar para buscar clareza antes de qualquer ajuste mais fino. {closing}"
+                )
+
         if "invest" in lower or "produto" in lower:
             return (
                 f"{intro} Posso te ajudar a entender como produtos como Tesouro Selic, CDB com liquidez diária e LCI/LCA "
@@ -426,6 +460,41 @@ class AuraAgent:
         return (
             f"{intro} Posso te ajudar com diagnóstico de gastos, reserva de emergência, comparação de produtos e educação financeira. "
             f"Quando possível, eu cruzo isso com fontes oficiais como {source_labels}. {closing}"
+        )
+
+    def _detect_conversation_focus(self, message: str, conversation_history: list[dict[str, str]]) -> str:
+        combined = " ".join(
+            [message]
+            + [item.get("content", "") for item in conversation_history[-4:] if item.get("role") in {"user", "assistant"}]
+        )
+        lower = self._normalize_text(combined)
+        if "reserva" in lower:
+            return "reserva"
+        if "selic" in lower:
+            return "selic"
+        if "tesouro" in lower or "cdb" in lower:
+            return "tesouro"
+        if any(term in lower for term in ["gasto", "gastos", "despesa", "despesas"]):
+            return "gastos"
+        if any(term in lower for term in ["saldo", "entradas", "saidas", "periodo"]):
+            return "saldo"
+        return "geral"
+
+    def _is_follow_up_message(self, lower_message: str) -> bool:
+        return any(
+            term in lower_message
+            for term in [
+                "e no meu caso",
+                "e isso",
+                "isso e bom",
+                "isso e ruim",
+                "isso é bom",
+                "isso é ruim",
+                "explica melhor",
+                "pode aprofundar",
+                "faz sentido",
+                "vale a pena",
+            ]
         )
 
     def _provider_failure_notice(self, provider_name: str, error: Exception) -> str:

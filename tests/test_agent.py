@@ -61,3 +61,19 @@ def test_fallback_changes_tone_by_persona() -> None:
     assert "segurança e liquidez" in conservador.text
     assert "Diego," in arrojado.text
     assert "volatilidade e horizonte de longo prazo" in arrojado.text
+
+def test_follow_up_uses_recent_conversation_focus() -> None:
+    project_root = Path(__file__).resolve().parent.parent
+    agent = AuraAgent(project_root)
+
+    answer = agent.answer(
+        "e no meu caso?",
+        conversation_history=[
+            {"role": "user", "content": "o que é selic?"},
+            {"role": "assistant", "content": "explicação anterior"},
+        ],
+        profile_override={"nome": "diego", "reserva_emergencia_atual": 2000.0},
+    )
+
+    assert "Diego," in answer.text
+    assert "Selic" in answer.text or "renda fixa" in answer.text or "reserva" in answer.text
