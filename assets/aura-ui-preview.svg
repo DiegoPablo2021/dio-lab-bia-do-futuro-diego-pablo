@@ -1,77 +1,88 @@
-<svg width="1400" height="880" viewBox="0 0 1400 880" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1400" height="880" rx="28" fill="#081321"/>
-  <rect x="0" y="0" width="228" height="880" fill="#262832"/>
-  <text x="22" y="70" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Aura</text>
-  <text x="22" y="118" fill="#C9D8EC" font-family="Segoe UI, Arial, sans-serif" font-size="18">Contexto da conversa</text>
-  <circle cx="30" cy="164" r="8" fill="#FF5A5F"/>
-  <text x="48" y="170" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Demonstração guiada</text>
-  <circle cx="30" cy="204" r="8" fill="#3B4256"/>
-  <text x="48" y="210" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Agente livre</text>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#091424"/>
+  <rect width="268" height="900" fill="#2A2B34"/>
+  <text x="214" y="42" fill="#B7BFD1" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">«</text>
 
-  <rect x="20" y="236" width="184" height="120" rx="14" fill="#2D4D74"/>
-  <text x="34" y="266" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Cenário pronto para demo</text>
-  <text x="34" y="288" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">com dados da DIO e</text>
-  <text x="34" y="310" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">contexto financeiro</text>
-  <text x="34" y="332" fill="#BFE0FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">consistente.</text>
+  <text x="20" y="98" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Contexto da conversa</text>
+  <text x="20" y="140" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">Modo de experiência</text>
+  <circle cx="150" cy="135" r="8" stroke="#8893A7" stroke-width="1.5"/>
+  <text x="147" y="140" fill="#8893A7" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">?</text>
+  <circle cx="27" cy="169" r="8" fill="#FF4D57"/>
+  <circle cx="27" cy="195" r="8" stroke="#6F788C" stroke-width="1.4"/>
+  <text x="44" y="174" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Demonstração guiada</text>
+  <text x="44" y="200" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Agente livre</text>
 
-  <text x="22" y="398" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Nome</text>
-  <text x="22" y="440" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Perfil</text>
-  <text x="22" y="482" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Objetivo</text>
-  <text x="72" y="398" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">João Silva</text>
-  <text x="72" y="440" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Moderado</text>
-  <text x="88" y="482" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Construir reserva</text>
-  <text x="22" y="520" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">de emergência</text>
-  <text x="22" y="580" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Reserva atual</text>
-  <text x="122" y="580" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">R$ 10.000,00</text>
+  <rect x="20" y="223" width="229" height="104" rx="10" fill="#31517B"/>
+  <text x="34" y="255" fill="#3FA2FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Cenário pronto para demo</text>
+  <text x="34" y="281" fill="#3FA2FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">com dados da DIO e contexto</text>
+  <text x="34" y="307" fill="#3FA2FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">financeiro consistente.</text>
 
-  <text x="22" y="632" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Configuração de IA</text>
-  <text x="22" y="668" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Provedor de IA</text>
-  <rect x="20" y="682" width="180" height="48" rx="12" fill="#0F1320"/>
-  <text x="34" y="712" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">gemini</text>
-  <text x="22" y="756" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Gemini API Key</text>
-  <rect x="20" y="770" width="180" height="48" rx="12" fill="#0F1320"/>
-  <circle cx="190" cy="794" r="7" fill="#D9E4F2"/>
-  <circle cx="190" cy="794" r="3" fill="#0F1320"/>
+  <text x="20" y="360" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Nome: João Silva</text>
+  <text x="20" y="403" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Perfil: Moderado</text>
+  <text x="20" y="446" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Objetivo: Construir reserva de</text>
+  <text x="20" y="473" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">emergência</text>
+  <text x="20" y="520" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Reserva atual: R$ 10.000,00</text>
 
-  <rect x="248" y="36" width="1122" height="194" rx="24" fill="#0D1B31" stroke="#203D62"/>
-  <text x="282" y="92" fill="#F3B562" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">DIAGNÓSTICO FINANCEIRO COM IA, DADOS E GUARDRAILS</text>
-  <text x="282" y="150" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">Aura, Mentora de Saúde Financeira</text>
-  <text x="282" y="195" fill="#D2E0F1" font-family="Segoe UI, Arial, sans-serif" font-size="22">Uma mentora digital que explica, organiza e contextualiza, sem promessas vazias.</text>
+  <text x="20" y="576" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Configuração de IA</text>
+  <text x="20" y="615" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">Provedor de IA</text>
+  <circle cx="220" cy="613" r="8" stroke="#8893A7" stroke-width="1.5"/>
+  <text x="217" y="618" fill="#8893A7" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">?</text>
+  <rect x="20" y="633" width="229" height="40" rx="8" fill="#0F1320"/>
+  <text x="34" y="659" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">gemini</text>
+  <path d="M226 649L233 656L240 649" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <text x="256" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Entradas</text>
-  <text x="256" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 5.000,00</text>
-  <text x="620" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Saídas</text>
-  <text x="620" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.488,90</text>
-  <text x="1004" y="300" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Saldo do período</text>
-  <text x="1004" y="350" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.511,10</text>
+  <text x="20" y="704" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">Gemini API Key</text>
+  <circle cx="220" cy="701" r="8" stroke="#8893A7" stroke-width="1.5"/>
+  <text x="217" y="706" fill="#8893A7" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">?</text>
+  <rect x="20" y="721" width="229" height="40" rx="8" fill="#0F1320"/>
+  <ellipse cx="216" cy="741" rx="10" ry="6.5" stroke="#FFFFFF" stroke-width="1.8"/>
+  <circle cx="216" cy="741" r="2.3" fill="#FFFFFF"/>
 
-  <text x="256" y="432" fill="#FF5A5F" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Chat educativo</text>
-  <text x="430" y="432" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Diagnóstico</text>
-  <text x="572" y="432" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Plano de 7 dias</text>
-  <line x1="254" y1="448" x2="1332" y2="448" stroke="#334761" stroke-width="2"/>
+  <rect x="20" y="753" width="229" height="126" rx="10" fill="#31517B"/>
+  <text x="34" y="786" fill="#3FA2FF" font-family="Consolas, monospace" font-size="12">Gemini desabilitado no</text>
+  <text x="34" y="812" fill="#3FA2FF" font-family="Consolas, monospace" font-size="12">seletor até que uma</text>
+  <text x="34" y="838" fill="#3FA2FF" font-family="Consolas, monospace" font-size="12">GEMINI_API_KEY seja inserida</text>
+  <text x="34" y="864" fill="#3FA2FF" font-family="Consolas, monospace" font-size="12">no campo Gemini API Key.</text>
 
-  <text x="256" y="508" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Converse com a Aura</text>
-  <text x="256" y="548" fill="#A9B9CF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Perguntas sugeridas: Onde estou gastando mais? | O que é Selic?</text>
-  <rect x="256" y="574" width="144" height="46" rx="12" fill="#0F1320" stroke="#334761"/>
-  <text x="280" y="603" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Nova conversa</text>
+  <rect x="337" y="114" width="1223" height="235" rx="26" fill="#0D1B31" stroke="#1F3657"/>
+  <text x="359" y="150" fill="#F0B35A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="2">DIAGNÓSTICO FINANCEIRO COM IA, DADOS E GUARDRAILS</text>
+  <text x="359" y="224" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700">Aura, Mentora de Saúde Financeira</text>
+  <text x="359" y="278" fill="#E4ECF8" font-family="Segoe UI, Arial, sans-serif" font-size="18">Uma mentora digital que explica, organiza e contextualiza. Sem promessas vazias, sem recomendação direta de investimento</text>
+  <text x="359" y="306" fill="#E4ECF8" font-family="Segoe UI, Arial, sans-serif" font-size="18">e com foco em clareza para iniciantes.</text>
 
-  <circle cx="280" cy="670" r="18" fill="#F59B23"/>
-  <rect x="272" y="662" width="16" height="14" rx="2.5" stroke="#0F1320" stroke-width="2"/>
-  <path d="M276 662V658C276 655.791 277.791 654 280 654C282.209 654 284 655.791 284 658V662" stroke="#0F1320" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="280" cy="669" r="1.8" fill="#0F1320"/>
-  <text x="314" y="668" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Sou a Aura. Posso analisar seus gastos, explicar conceitos financeiros</text>
-  <text x="314" y="701" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">e montar um plano educativo com base no seu contexto.</text>
-  <text x="314" y="732" fill="#A9B9CF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Modo: intro</text>
+  <text x="337" y="420" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Entradas</text>
+  <text x="337" y="460" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 5.000,00</text>
+  <text x="657" y="420" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Saídas</text>
+  <text x="657" y="460" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.488,90</text>
+  <text x="974" y="420" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Saldo do período</text>
+  <text x="974" y="460" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">R$ 2.511,10</text>
+  <text x="1300" y="420" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Reserva concluída</text>
+  <text x="1300" y="460" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">33.3%</text>
 
-  <rect x="256" y="752" width="1080" height="72" rx="18" fill="#1F2430"/>
-  <circle cx="292" cy="788" r="18" fill="#FF4D4F"/>
-  <circle cx="292" cy="788" r="7" fill="none" stroke="#0F1320" stroke-width="2"/>
-  <circle cx="289" cy="786" r="1.6" fill="#0F1320"/>
-  <circle cx="295" cy="786" r="1.6" fill="#0F1320"/>
-  <path d="M288 792C289.6 794 294.4 794 296 792" stroke="#0F1320" stroke-width="2" stroke-linecap="round"/>
-  <text x="326" y="795" fill="#F8FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">O que é Selic?</text>
+  <text x="337" y="523" fill="#FF4D57" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Chat educativo</text>
+  <text x="423" y="523" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Diagnóstico</text>
+  <text x="498" y="523" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16">Plano de 7 dias</text>
+  <line x1="337" y1="543" x2="1560" y2="543" stroke="#2F4057" stroke-width="2"/>
 
-  <rect x="256" y="838" width="1080" height="36" rx="10" fill="#0F1320" opacity="0.55"/>
-  <rect x="256" y="804" width="1080" height="56" rx="16" fill="#2B2A33" opacity="0"/>
-  <text x="286" y="855" fill="#9FB0C7" font-family="Segoe UI, Arial, sans-serif" font-size="20">Digite sua dúvida sobre saúde financeira</text>
+  <text x="337" y="586" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Converse com a Aura</text>
+  <text x="337" y="626" fill="#909AAF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Perguntas sugeridas: Onde estou gastando mais? | O que é Selic? | Me explique Tesouro Selic.</text>
+  <rect x="337" y="657" width="123" height="38" rx="10" fill="#121827" stroke="#51617A"/>
+  <text x="354" y="682" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">Nova conversa</text>
+
+  <rect x="351" y="726" width="36" height="36" rx="10" fill="#F59B23"/>
+  <rect x="361" y="738" width="16" height="12" rx="2" stroke="#0B0B0B" stroke-width="2"/>
+  <path d="M365 738V734C365 731.8 366.8 730 369 730C371.2 730 373 731.8 373 734V738" stroke="#0B0B0B" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="369" cy="744" r="1.6" fill="#0B0B0B"/>
+  <text x="404" y="740" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">Sou a Aura. Posso analisar seus gastos, explicar conceitos financeiros e montar um plano</text>
+  <text x="404" y="777" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">educativo com base no seu contexto.</text>
+  <text x="404" y="812" fill="#909AAF" font-family="Segoe UI, Arial, sans-serif" font-size="15">Modo: intro</text>
+
+  <rect x="357" y="843" width="1155" height="55" rx="12" fill="#1F2430"/>
+  <rect x="374" y="859" width="54" height="54" rx="16" fill="#FF4048"/>
+  <circle cx="401" cy="886" r="11" stroke="#0B0B0B" stroke-width="2.2"/>
+  <circle cx="397" cy="882" r="1.8" fill="#0B0B0B"/>
+  <circle cx="405" cy="882" r="1.8" fill="#0B0B0B"/>
+  <path d="M395 890C397.5 887 404.5 887 407 890" stroke="#0B0B0B" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M393 878C394 874 398 872 401 872C404 872 408 874 409 878" stroke="#0B0B0B" stroke-width="2.2" stroke-linecap="round"/>
+  <text x="448" y="891" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">o que é selic?</text>
 </svg>
