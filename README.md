@@ -98,7 +98,18 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 ```text
 .
 |-- assets/
+|   |-- arquitetura-aura.svg
+|   |-- aura-agente-livre-preview.svg
+|   `-- aura-ui-preview.svg
 |-- data/
+|   |-- bcdata.sgs.11.csv
+|   |-- historico_atendimento.csv
+|   |-- perfil_investidor.json
+|   |-- personas_investidor.json
+|   |-- produtos_financeiros.json
+|   |-- selic_bacen.json
+|   |-- tesouro_direto_produtos.json
+|   `-- transacoes.csv
 |-- docs/
 |   |-- 01-documentacao-agente.md
 |   |-- 02-base-conhecimento.md
@@ -108,10 +119,12 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 |   `-- 06-evidencias.md
 |-- src/
 |   |-- app.py
+|   |-- __init__.py
 |   |-- prompts/
 |   |   |-- few_shots.txt
 |   |   `-- system_prompt.txt
 |   `-- services/
+|       |-- __init__.py
 |       |-- agent.py
 |       |-- context_builder.py
 |       |-- data_loader.py
@@ -119,6 +132,9 @@ Construir uma mentora digital de saúde financeira capaz de transformar dados em
 |       |-- finance_analyzer.py
 |       `-- safety.py
 |-- tests/
+|   |-- test_agent.py
+|   |-- test_finance_analyzer_service.py
+|   `-- test_safety.py
 |-- .env.example
 |-- .gitignore
 |-- main.py
