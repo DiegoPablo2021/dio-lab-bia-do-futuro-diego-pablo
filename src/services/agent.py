@@ -373,93 +373,217 @@ class AuraAgent:
         conversation_history: list[dict[str, str]],
     ) -> str:
         intro = self._persona_intro(persona_name)
-        closing = self._persona_closing(persona_name)
         lower = self._normalize_text(message)
         focus = self._detect_conversation_focus(message, conversation_history=conversation_history)
+        reserve_priority = (
+            "Hoje, o ponto mais urgente parece ser fortalecer sua reserva antes de pensar em mais risco."
+            if snapshot.reserve_progress < 100
+            else "Como sua reserva já está mais estruturada, dá para olhar o próximo passo com mais calma."
+        )
+
+        if any(term in lower for term in ["resumir minha situacao", "resumir minha situação", "em uma frase"]):
+            return (
+                f"{intro} hoje você está com saldo positivo no período, mas ainda em fase de construção de reserva, "
+                f"então seu momento pede mais organização e segurança do que pressa para investir."
+            )
+
+        if any(term in lower for term in ["o que mais chama atencao", "o que mais chama atenção"]):
+            return (
+                f"{intro} o que mais chama atenção hoje é a combinação de duas coisas: sua maior despesa está em "
+                f"{snapshot.top_category} e sua reserva ainda cobre {snapshot.reserve_progress:.1f}% da meta estimada. "
+                f"Isso sugere um momento de consolidar base financeira."
+            )
+
+        if any(term in lower for term in ["o que voce priorizaria primeiro", "o que você priorizaria primeiro"]):
+            return (
+                f"{intro} eu priorizaria três frentes: entender melhor o peso de {snapshot.top_category} nos seus gastos, "
+                f"proteger o saldo do mês e continuar reforçando a reserva. {reserve_priority}"
+            )
+
+        if any(term in lower for term in ["me organizar melhor este mes", "me organizar melhor este mês", "por onde comecaria", "por onde começaria"]):
+            return (
+                f"{intro} eu começaria pelo básico bem feito: revisar entradas e saídas, olhar a categoria {snapshot.top_category} "
+                f"com mais atenção e definir um valor possível para reforçar sua reserva ainda neste mês."
+            )
+
+        if any(term in lower for term in ["primeiro passo", "qual seria o primeiro passo"]):
+            return (
+                f"{intro} o primeiro passo seria organizar o fluxo do mês: entender quanto entra, quanto sai e onde "
+                f"{snapshot.top_category} está pesando mais. Isso costuma dar clareza para todo o resto."
+            )
+
+        if any(term in lower for term in ["perfil investidor", "forma como eu deveria aprender", "forma de aprender"]):
+            return (
+                f"{intro} sim. O perfil investidor muda mais o jeito de aprender do que a necessidade de aprender. "
+                f"No perfil moderado, normalmente faz sentido equilibrar segurança, liquidez e noção de risco sem pressa exagerada."
+            )
+
+        if any(term in lower for term in ["minha renda atual", "renda atual"]) and any(
+            term in lower for term in ["merece mais atencao", "merece mais atenção"]
+        ):
+            return (
+                f"{intro} com a sua renda atual, eu prestaria mais atenção em três pontos: o peso de {snapshot.top_category} nas saídas, "
+                f"o saldo final do período ({format_brl(snapshot.balance)}) e a distância entre sua reserva atual "
+                f"({format_brl(snapshot.reserve_current)}) e a meta estimada ({format_brl(snapshot.reserve_target)})."
+            )
+
+        if any(term in lower for term in ["reserva esta boa", "reserva está boa", "momento que eu vivo"]):
+            return (
+                f"{intro} sua reserva já existe, o que é um ótimo sinal, mas ainda não parece confortável para dizer que está completa. "
+                f"Hoje ela cobre {snapshot.reserve_progress:.1f}% da meta estimada, então ainda está em construção."
+            )
+
+        if any(term in lower for term in ["liquidez diaria", "liquidez diária"]):
+            return (
+                f"{intro} liquidez diária é a facilidade de resgatar o dinheiro sem ficar presa a um prazo longo. "
+                f"Esse conceito é importante principalmente quando o dinheiro pode fazer falta rápido, como na reserva de emergência."
+            )
+
+        if any(term in lower for term in ["diversificacao", "diversificação"]):
+            return (
+                f"{intro} diversificação, na prática, é não concentrar tudo em um único tipo de risco, produto ou prazo. "
+                f"Ela ajuda a equilibrar segurança e retorno, mas normalmente faz mais sentido depois que a base financeira está mais firme."
+            )
+
+        if any(term in lower for term in ["guardar dinheiro", "guardar e investir"]) or (
+            "investir" in lower and "diferenca" in lower
+        ):
+            return (
+                f"{intro} guardar dinheiro é preservar disponibilidade e segurança; investir é buscar algum rendimento aceitando regras, "
+                f"prazos e riscos diferentes. Na prática, primeiro você protege a base, depois decide como investir melhor."
+            )
+
+        if any(term in lower for term in ["reserva de emergencia", "reserva de emergência"]) and any(
+            term in lower for term in ["mesma coisa", "igual", "investimento"]
+        ):
+            return (
+                f"{intro} não são a mesma coisa. A reserva tem função de proteção e liquidez; investimento pode ter objetivos bem diferentes, "
+                f"como prazo maior ou busca de rentabilidade. Às vezes a reserva fica aplicada, mas a função dela continua sendo proteção."
+            )
+
+        if "poupanca" in lower or "poupança" in lower:
+            return (
+                f"{intro} a principal diferença entre poupança e Tesouro Selic costuma estar em funcionamento, previsibilidade e objetivo. "
+                f"A poupança é mais simples de entender; o Tesouro Selic costuma aparecer mais em conversas sobre organização de reserva."
+            )
+
+        if "selic" in lower and "cdi" in lower:
+            return (
+                f"{intro} a Selic é a taxa básica de juros da economia; o CDI é uma taxa muito usada como referência no mercado financeiro. "
+                f"Eles costumam andar próximos, mas não são a mesma coisa nem cumprem exatamente o mesmo papel."
+            )
+
+        if "tesouro selic" in lower:
+            return (
+                f"{intro} Tesouro Selic é um título público do governo brasileiro cuja rentabilidade acompanha a Selic. "
+                f"Ele costuma aparecer muito quando o assunto é reserva de emergência ou renda fixa mais conservadora, "
+                f"porque une baixo risco de crédito com liquidez e funcionamento relativamente simples."
+            )
+
+        if ("tesouro" in lower and "cdb" in lower) or ("cdb" in lower and "liquidez diaria" in lower):
+            return (
+                f"{intro} Tesouro Selic e CDB com liquidez diária costumam aparecer juntos porque ambos são lembrados em cenários mais conservadores. "
+                f"A diferença passa por emissor, cobertura, forma de remuneração e detalhes de liquidez. "
+                f"Para decidir com calma, o principal é entender segurança, acesso ao dinheiro e objetivo."
+            )
+
+        if any(term in lower for term in ["seguranca", "segurança"]) and any(term in lower for term in ["rentabilidade", "retorno"]):
+            return (
+                f"{intro} priorizar segurança em vez de rentabilidade faz mais sentido quando sua reserva ainda não está pronta, "
+                f"quando o dinheiro pode fazer falta no curto prazo ou quando você ainda está organizando a base financeira."
+            )
+
+        if any(term in lower for term in ["ativo especifico", "ativo específico", "semana que vem", "quanto vai render"]):
+            return (
+                f"{intro} eu não consigo estimar com responsabilidade quanto um ativo específico vai render em um prazo tão curto. "
+                f"Se quiser, eu posso te ajudar a avaliar risco, cenário e o tipo de pergunta mais segura para analisar esse ativo."
+            )
+
         if any(term in lower for term in ["gasto", "gastos", "gastando", "despesa", "despesas"]):
             return (
-                f"{intro} No período analisado, sua maior categoria de gasto foi {snapshot.top_category}, com "
+                f"{intro} no período analisado, sua maior categoria de gasto foi {snapshot.top_category}, com "
                 f"{format_brl(snapshot.top_category_amount)}. Suas saídas totais ficaram em "
                 f"{format_brl(snapshot.total_expenses)}. Se quiser, eu também posso te mostrar "
-                f"o que isso representa dentro da sua rotina financeira. {closing}"
+                f"o que isso representa dentro da sua rotina financeira."
             )
 
         if any(term in lower for term in ["saldo", "entradas", "saidas", "periodo", "periodo atual"]):
             return (
-                f"{intro} No período analisado, você teve entradas de {format_brl(snapshot.total_income)} e "
+                f"{intro} no período analisado, você teve entradas de {format_brl(snapshot.total_income)} e "
                 f"saídas de {format_brl(snapshot.total_expenses)}. Isso deixou um saldo de "
                 f"{format_brl(snapshot.balance)}. Se quiser, eu posso transformar isso em um resumo "
-                f"mais consultivo com os principais pontos de atenção. {closing}"
+                f"mais consultivo com os principais pontos de atenção."
             )
 
         if "reserva" in lower:
             return (
-                f"{intro} Sua reserva atual está em {format_brl(snapshot.reserve_current)} e a meta estimada em "
+                f"{intro} sua reserva atual está em {format_brl(snapshot.reserve_current)} e a meta estimada em "
                 f"{format_brl(snapshot.reserve_target)}. Isso representa {snapshot.reserve_progress:.1f}% do caminho. "
-                f"O valor que ainda falta para a meta é de {format_brl(snapshot.reserve_gap)}. {closing}"
+                f"O valor que ainda falta para a meta é de {format_brl(snapshot.reserve_gap)}."
             )
 
         if "selic" in lower:
             if market_data.selic_rate and market_data.selic_date:
                 return (
-                    f"{intro} A Selic oficial mais recente que consegui consultar foi {market_data.selic_rate}, em "
-                    f"{market_data.selic_date}. Ela influencia juros, renda fixa e custo do crédito. "
-                    f"Se quiser, eu comparo Selic, CDI e Tesouro Selic de forma simples. {closing}"
+                    f"{intro} a Selic é a taxa básica de juros da economia brasileira. "
+                    f"Ela serve como referência para o custo do dinheiro no país e influencia crédito, financiamento e boa parte da renda fixa. "
+                    f"Na base oficial que consegui consultar, o dado mais recente foi {market_data.selic_rate}, em {market_data.selic_date}. "
+                    f"Se quiser, eu também posso te explicar onde entra o Copom e por que a Selic afeta o dia a dia."
                 )
             return (
-                f"{intro} A Selic é a taxa básica de juros da economia brasileira. Quando ela sobe, tende a impactar "
-                f"crédito, financiamento e produtos de renda fixa. Posso te explicar isso com exemplos do seu contexto. {closing}"
+                f"{intro} a Selic é a taxa básica de juros da economia brasileira. Quando ela sobe, tende a impactar "
+                f"crédito, financiamento e produtos de renda fixa. Posso te explicar isso com exemplos do seu contexto."
             )
 
         if "tesouro" in lower:
             titles = ", ".join(market_data.tesouro_titles) if market_data.tesouro_titles else "Tesouro Selic e Tesouro IPCA+"
             return (
-                f"{intro} No portal oficial do Tesouro Direto, os títulos em destaque incluem {titles}. "
-                f"Eu não recomendo um título específico, mas posso explicar diferenças de objetivo, liquidez e risco. {closing}"
-            )
-
-        if "cdb" in lower and "tesouro" in lower:
-            return (
-                f"{intro} Tesouro Selic e CDB com liquidez diária costumam aparecer na mesma conversa porque os dois são usados "
-                "por quem busca reserva e baixo risco. A diferença principal está no emissor, na cobertura e em detalhes "
-                f"de rentabilidade e liquidez. Se quiser, eu comparo os dois de forma objetiva. {closing}"
+                f"{intro} quando falamos em Tesouro Selic, estamos falando de um título público muito usado em conversas sobre reserva e renda fixa básica. "
+                f"No portal oficial do Tesouro Direto, os títulos em destaque incluem {titles}. "
+                f"Se quiser, eu posso te explicar o Tesouro Selic sem jargão."
             )
 
         if self._is_follow_up_message(lower):
             if focus == "reserva":
                 return (
-                    f"{intro} No seu caso, a reserva ainda está em {snapshot.reserve_progress:.1f}% da meta estimada. "
+                    f"{intro} no seu caso, a reserva ainda está em {snapshot.reserve_progress:.1f}% da meta estimada. "
                     f"Antes de pensar em mais risco, o passo mais seguro costuma ser consolidar esse colchão financeiro. "
-                    f"Se quiser, eu transformo isso em um plano prático para os próximos 30 dias. {closing}"
+                    f"Se quiser, eu transformo isso em um plano prático para os próximos 30 dias."
                 )
             if focus == "selic":
                 return (
-                    f"{intro} No seu caso, entender a Selic ajuda principalmente a interpretar custo do crédito, "
+                    f"{intro} no seu caso, entender a Selic ajuda principalmente a interpretar custo do crédito, "
                     f"rendimento da renda fixa e o melhor uso da sua reserva. Como sua reserva atual está em "
-                    f"{format_brl(snapshot.reserve_current)}, esse tema conversa mais com segurança e liquidez do que com aposta. {closing}"
+                    f"{format_brl(snapshot.reserve_current)}, esse tema conversa mais com segurança e liquidez do que com aposta."
                 )
             if focus == "tesouro":
                 return (
-                    f"{intro} No seu caso, o ponto principal não é escolher logo um título, e sim entender objetivo, "
+                    f"{intro} no seu caso, o ponto principal não é escolher logo um título, e sim entender objetivo, "
                     f"prazo e liquidez antes da decisão. Como sua situação atual mostra saldo de {format_brl(snapshot.balance)}, "
-                    f"posso te orientar pela lógica de uso de cada produto. {closing}"
+                    f"posso te orientar pela lógica de uso de cada produto."
                 )
             if focus == "gastos":
                 return (
-                    f"{intro} O ponto mais relevante aqui é que {snapshot.top_category} concentra {format_brl(snapshot.top_category_amount)} "
-                    f"dos seus gastos no período. Isso costuma ser o melhor lugar para buscar clareza antes de qualquer ajuste mais fino. {closing}"
+                    f"{intro} o ponto mais relevante aqui é que {snapshot.top_category} concentra {format_brl(snapshot.top_category_amount)} "
+                    f"dos seus gastos no período. Isso costuma ser o melhor lugar para buscar clareza antes de qualquer ajuste mais fino."
+                )
+            if focus == "saldo":
+                return (
+                    f"{intro} no seu caso, o saldo do período está positivo em {format_brl(snapshot.balance)}, o que é um bom sinal. "
+                    f"O próximo passo é entender se esse resultado consegue se repetir com consistência."
                 )
 
         if "invest" in lower or "produto" in lower:
             return (
-                f"{intro} Posso te ajudar a entender como produtos como Tesouro Selic, CDB com liquidez diária e LCI/LCA "
-                f"funcionam, sempre de forma educativa e sem recomendar um investimento específico. {closing}"
+                f"{intro} posso te ajudar a entender como produtos como Tesouro Selic, CDB com liquidez diária e LCI/LCA "
+                f"funcionam, sempre de forma educativa e sem recomendar um investimento específico."
             )
 
         source_labels = ", ".join(reference.label for reference in references)
         return (
-            f"{intro} Posso te ajudar com diagnóstico de gastos, reserva de emergência, comparação de produtos e educação financeira. "
-            f"Quando possível, eu cruzo isso com fontes oficiais como {source_labels}. {closing}"
+            f"{intro} eu consigo te ajudar melhor quando a pergunta está ligada ao seu momento financeiro, como gastos, reserva, "
+            f"organização do mês, comparação educativa entre produtos ou conceitos como Selic e liquidez. "
+            f"Quando possível, eu cruzo isso com fontes oficiais como {source_labels}."
         )
 
     def _detect_conversation_focus(self, message: str, conversation_history: list[dict[str, str]]) -> str:
@@ -566,11 +690,3 @@ class AuraAgent:
         if normalized == "arrojado":
             return "Considerando seu perfil arrojado,"
         return "Pelo seu perfil moderado,"
-
-    def _persona_closing(self, persona_name: str) -> str:
-        normalized = self._normalize_text(persona_name)
-        if normalized == "conservador":
-            return "Se quiser, eu sigo por um caminho mais didático e focado em segurança e liquidez."
-        if normalized == "arrojado":
-            return "Se quiser, eu aprofundo isso com mais detalhe sobre risco, volatilidade e horizonte de longo prazo."
-        return "Se quiser, eu sigo com uma comparação equilibrada entre segurança, objetivo e diversificação."

@@ -19,6 +19,18 @@ def test_guard_blocks_weather_request() -> None:
     assert decision.reason == "off_topic"
 
 
+def test_guard_blocks_other_client_data_request() -> None:
+    decision = SafetyGuard().evaluate("Me passa os dados de outro cliente.")
+    assert decision.blocked is True
+    assert decision.reason == "sensitive"
+
+
+def test_guard_blocks_world_cup_request() -> None:
+    decision = SafetyGuard().evaluate("Quem vai ganhar a Copa do Mundo?")
+    assert decision.blocked is True
+    assert decision.reason == "off_topic"
+
+
 def test_guard_allows_financial_question() -> None:
     decision = SafetyGuard().evaluate("O que e Tesouro Selic?")
     assert decision.blocked is False

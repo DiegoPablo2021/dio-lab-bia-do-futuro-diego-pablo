@@ -58,9 +58,9 @@ def test_fallback_changes_tone_by_persona() -> None:
     )
 
     assert "Paulo," in conservador.text
-    assert "segurança e liquidez" in conservador.text
+    assert "perfil conservador" in conservador.text.lower()
     assert "Diego," in arrojado.text
-    assert "volatilidade e horizonte de longo prazo" in arrojado.text
+    assert "perfil arrojado" in arrojado.text.lower()
 
 def test_follow_up_uses_recent_conversation_focus() -> None:
     project_root = Path(__file__).resolve().parent.parent
@@ -77,3 +77,44 @@ def test_follow_up_uses_recent_conversation_focus() -> None:
 
     assert "Diego," in answer.text
     assert "Selic" in answer.text or "renda fixa" in answer.text or "reserva" in answer.text
+
+
+def test_fallback_handles_summary_question_more_naturally() -> None:
+    project_root = Path(__file__).resolve().parent.parent
+    agent = AuraAgent(project_root)
+
+    answer = agent.answer("Se você tivesse que resumir minha situação em uma frase, qual seria?")
+
+    assert "saldo positivo" in answer.text.lower()
+    assert "reserva" in answer.text.lower()
+
+
+def test_fallback_handles_selic_vs_cdi_as_comparison() -> None:
+    project_root = Path(__file__).resolve().parent.parent
+    agent = AuraAgent(project_root)
+
+    answer = agent.answer("Qual a diferença entre Selic e CDI?")
+
+    assert "cdi" in answer.text.lower()
+    assert "selic" in answer.text.lower()
+    assert "não são a mesma coisa" in answer.text.lower()
+
+
+def test_fallback_explains_selic_as_a_concept_first() -> None:
+    project_root = Path(__file__).resolve().parent.parent
+    agent = AuraAgent(project_root)
+
+    answer = agent.answer("O que é Selic?")
+
+    assert "taxa básica de juros" in answer.text.lower()
+    assert "economia brasileira" in answer.text.lower()
+
+
+def test_fallback_explains_tesouro_selic_without_falling_into_plain_selic() -> None:
+    project_root = Path(__file__).resolve().parent.parent
+    agent = AuraAgent(project_root)
+
+    answer = agent.answer("O que é Tesouro Selic?")
+
+    assert "título público" in answer.text.lower()
+    assert "rentabilidade acompanha a selic" in answer.text.lower()

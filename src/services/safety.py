@@ -12,11 +12,24 @@ class GuardrailDecision:
 
 
 class SafetyGuard:
-    SENSITIVE_KEYWORDS = ("senha", "token", "cvv", "codigo de seguranca", "cpf de outro", "cartao de outro")
+    SENSITIVE_KEYWORDS = (
+        "senha",
+        "token",
+        "cvv",
+        "codigo de seguranca",
+        "cpf de outro",
+        "cartao de outro",
+        "dados de outro cliente",
+        "dados de outro",
+        "outro cliente",
+        "me passa os dados",
+    )
     OFF_TOPIC_KEYWORDS = (
         "clima",
         "previsao do tempo",
         "resultado do jogo",
+        "quem vai ganhar",
+        "copa do mundo",
         "jogo do flamengo",
         "placar",
         "horoscopo",
@@ -44,8 +57,8 @@ class SafetyGuard:
             return GuardrailDecision(
                 blocked=True,
                 message=(
-                    "Não posso acessar nem compartilhar dados sensíveis. Posso ajudar explicando boas práticas "
-                    "de segurança financeira."
+                    "Não posso acessar nem compartilhar dados sensíveis de ninguém. "
+                    "Se quiser, eu posso te orientar sobre segurança, privacidade e boas práticas no atendimento financeiro."
                 ),
                 reason="sensitive",
             )
