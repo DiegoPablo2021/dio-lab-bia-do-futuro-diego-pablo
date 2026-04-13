@@ -8,9 +8,9 @@ Aura é uma mentora digital de saúde financeira para iniciantes no Brasil. Ela 
 
 [Acessar app no Streamlit](https://aura-mentora-de-saude-financeira.streamlit.app/)
 
-![Preview da interface da Aura](./assets/aura-ui-preview.svg)
+![Preview da interface da Aura](./assets/Captura_Demonstacao_Guiada.png)
 
-![Preview do modo Agente Livre](./assets/aura-agente-livre-preview.svg)
+![Preview do modo Agente Livre](./assets/Captura_Agente_Livre.png)
 
 ![Arquitetura da Aura](./assets/arquitetura-aura.svg)
 
